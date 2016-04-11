@@ -1,0 +1,20 @@
+/*
+ Localizable.strings
+ 
+ Created by Geno on 7/26/15.
+ Copyright (c) 2015 MobiKash. All rights reserved.
+ */
+"network_error_title" = "Network Error";
+"network_error_msg"="Please check if your Internet connection is OK and try again";
+"network_error_bad_request"="Sorry, your request could not be processed, please try again";
+"network_error_unauthorized"="Sorry, you are not allowed to access this service";
+"network_error_not_found"="Sorry, this service is currently not available, please try again later";
+"network_error_time_out"="Sorry, the connection to the service has timed out, please try again later";
+"network_error_internal_error"="Sorry, this service is experiencing a temporary problem, please try again later";
+"network_error_unavailable"="Sorry, this service is temporarily unavailable, please try again later";
+
+"response"="Response";
+"response_processing_error"="Sorry, there was an error in getting a response, please try again later";
+
+
+

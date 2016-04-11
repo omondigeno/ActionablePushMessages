@@ -1,0 +1,22 @@
+PODS:
+  - Alamofire (3.2.1)
+  - IQKeyboardManagerSwift (4.0.0)
+  - MK (1.27.14)
+  - PKHUD (3.1.0)
+  - SnapKit (0.15.0)
+
+DEPENDENCIES:
+  - Alamofire (= 3.2.1)
+  - IQKeyboardManagerSwift (= 4.0.0)
+  - MK
+  - PKHUD
+  - SnapKit (= 0.15.0)
+
+SPEC CHECKSUMS:
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
+  MK: a68c9ae628f625847bddf5921e7a208873d192c2
+  PKHUD: 4167eccdb1b3a892fd80ce2b51cb6ba412a889ab
+  SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
+
+COCOAPODS: 0.39.0
