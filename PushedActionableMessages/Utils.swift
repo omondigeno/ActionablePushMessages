@@ -22,4 +22,15 @@ class Utils {
         let defaults = NSUserDefaults.standardUserDefaults()
         return defaults.valueForKey(name) as? String
     }
+    
+    class func getUUID() -> String? {
+        if let UUID = getData("UUID") {
+        return UUID
+        }
+        else {
+            let UUID = NSUUID().UUIDString
+            saveData("UUID", value: UUID)
+            return UUID
+        }
+    }
 }

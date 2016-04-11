@@ -12,5 +12,5 @@ import MK
 
 extension UIColor {
     
-    @nonobjc static var brandColor = MaterialColor.orange.darken3
+    @nonobjc static var brandColor = MaterialColor.blue.accent3
 }

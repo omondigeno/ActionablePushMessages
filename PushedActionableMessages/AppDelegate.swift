@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,24 +20,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             registerForPushNotifications(application)
         
         // Check if launched from notification
-        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
-            let aps = notification["aps"] as! [String: AnyObject]
-            //createNewNewsItem(aps)
+        if let _ = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
+            //let aps = notification["aps"] as! [String: AnyObject]
             print("launched from notification")
             
         }
 
+        window!.rootViewController = ViewController()
+        IQKeyboardManager.sharedManager().enable = true
+        window!.makeKeyAndVisible()
+        
         return true
     }
     
     func registerForPushNotifications(application: UIApplication) {
         let viewAction = UIMutableUserNotificationAction()
-        viewAction.identifier = "VIEW_IDENTIFIER"
-        viewAction.title = "View"
+        viewAction.identifier = payIdentifier
+        viewAction.title = "Pay"
         viewAction.activationMode = .Foreground
         
         let newsCategory = UIMutableUserNotificationCategory()
-        newsCategory.identifier = "NEWS_CATEGORY"
+        newsCategory.identifier = "PAYMENT_CATEGORY"
         newsCategory.setActions([viewAction], forContext: .Default)
         
         let notificationSettings = UIUserNotificationSettings(
@@ -62,30 +66,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var parameters = [String: AnyObject]()
         parameters["registrationToken"] = tokenString
+        parameters["deviceId"] = Utils.getUUID()
         
-        var responseHandler = ResponseHandler(background: true, viewController: nil)
+        //# TODO: implement retries in case registration fails
         
-        HTTPClient.get("register", parameters: parameters, responseHandlerDelegate: responseHandler)
+        HTTPClient.get("register", parameters: parameters, responseHandlerDelegate: ResponseHandler(background: true, viewController: nil))
     }
     
     func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
             print("Failed to register:", error)
-            var parameters = [String: AnyObject]()
-            parameters["registrationToken"] = "\(error.localizedDescription)"
-            
-            var responseHandler = ResponseHandler(background: true, viewController: nil)
-            
-            HTTPClient.get("register", parameters: parameters, responseHandlerDelegate: responseHandler)
 
     }
     
     func application( application: UIApplication,
         didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-            //let aps = userInfo["aps"] as! [String: AnyObject]
             print("app was running \(userInfo)")
             
-            if let identifier = userInfo["action_identifier"] as? String, amount = userInfo["amount"] as? String where identifier == "VIEW_IDENTIFIER"{
+            if let identifier = userInfo["action_identifier"] as? String, amount = userInfo["amount"] as? String where identifier == payIdentifier{
                 //# TODO: ideally use local notification to avoid rudely interrupting user
                 showAlert(amount)
             }
@@ -94,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         print("handleActionWithIdentifier \(userInfo)")
 
-        if identifier == "VIEW_IDENTIFIER", let amount = userInfo["amount"] as? String{
+        if identifier == payIdentifier, let amount = userInfo["amount"] as? String{
            showAlert(amount)
         }
         

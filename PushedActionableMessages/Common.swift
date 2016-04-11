@@ -45,3 +45,5 @@ class Common {
         
     }
 }
+
+let payIdentifier = "PAY_IDENTIFIER"
