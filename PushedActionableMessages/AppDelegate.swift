@@ -12,30 +12,35 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    var connectedToGCM = false
-    var subscribedToTopic = false
-    var gcmSenderID: String?
-    var registrationToken: String?
-    var registrationOptions = [String: AnyObject]()
-    
-    let registrationKey = "onRegistrationCompleted"
-    let messageKey = "onMessageReceived"
-    let subscriptionTopic = "/topics/global"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Register for remote notifications
             registerForPushNotifications(application)
         
-    
+        // Check if launched from notification
+        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
+            let aps = notification["aps"] as! [String: AnyObject]
+            //createNewNewsItem(aps)
+            print("launched from notification")
+            
+        }
 
         return true
     }
     
     func registerForPushNotifications(application: UIApplication) {
+        let viewAction = UIMutableUserNotificationAction()
+        viewAction.identifier = "VIEW_IDENTIFIER"
+        viewAction.title = "View"
+        viewAction.activationMode = .Foreground
+        
+        let newsCategory = UIMutableUserNotificationCategory()
+        newsCategory.identifier = "NEWS_CATEGORY"
+        newsCategory.setActions([viewAction], forContext: .Default)
+        
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+            forTypes: [.Badge, .Sound, .Alert], categories: [newsCategory])
         application.registerUserNotificationSettings(notificationSettings)
     }
     
@@ -74,6 +79,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             HTTPClient.get("register", parameters: parameters, responseHandlerDelegate: responseHandler)
 
     }
+    
+    func application( application: UIApplication,
+        didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+            //let aps = userInfo["aps"] as! [String: AnyObject]
+            print("app was running \(userInfo)")
+            
+            if let identifier = userInfo["action_identifier"] as? String, amount = userInfo["amount"] as? String where identifier == "VIEW_IDENTIFIER"{
+                //# TODO: ideally use local notification to avoid rudely interrupting user
+                showAlert(amount)
+            }
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        print("handleActionWithIdentifier \(userInfo)")
+
+        if identifier == "VIEW_IDENTIFIER", let amount = userInfo["amount"] as? String{
+           showAlert(amount)
+        }
+        
+        completionHandler()
+    }
+    
+    func showAlert(amount: String){
+        let alert = UIAlertController(
+            title: "Payment", message: String(format: Utils.getString("payment_message"), amount), preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler {
+                (tf:UITextField) in
+                tf.keyboardType = .NumberPad
+                tf.placeholder = amount
+        }
+        
+        alert.addAction(UIAlertAction(
+            title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(
+            title: "OK", style: .Default, handler: alertHandler))
+        
+        window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func alertHandler(act:UIAlertAction) {
+                   
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -96,29 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
   
-    
-    func application( application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-            
-    }
-    
-    func application( application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
-        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
-          
-    }
-    
-    func willSendDataMessageWithID(messageID: String!, error: NSError!) {
-        if (error != nil) {
-            // Failed to send the message.
-        } else {
-            // Will send message, you can save the messageID to track the message
-        }
-    }
-    
-    func didSendDataMessageWithID(messageID: String!) {
-        // Did successfully send message identified by messageID
-    }
+ 
 
 }
 

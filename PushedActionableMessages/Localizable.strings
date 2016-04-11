@@ -16,5 +16,7 @@
 "response"="Response";
 "response_processing_error"="Sorry, there was an error in getting a response, please try again later";
 
+"payment_message"="Kindly pay KSh %@ due to Pizza Inn";
+
 
 
