@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if launched from notification
         if let _ = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
-            //let aps = notification["aps"] as! [String: AnyObject]
+            
             print("launched from notification")
             
         }
@@ -39,12 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewAction.title = "Pay"
         viewAction.activationMode = .Foreground
         
-        let newsCategory = UIMutableUserNotificationCategory()
-        newsCategory.identifier = "PAYMENT_CATEGORY"
-        newsCategory.setActions([viewAction], forContext: .Default)
+        let payCategory = UIMutableUserNotificationCategory()
+        payCategory.identifier = payCategoryId
+        payCategory.setActions([viewAction], forContext: .Default)
+        
+        let chatCategory = UIMutableUserNotificationCategory()
+        chatCategory.identifier = chatCategoryId
         
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: [newsCategory])
+            forTypes: [.Badge, .Sound, .Alert], categories: [payCategory, chatCategory])
         application.registerUserNotificationSettings(notificationSettings)
     }
     
@@ -86,6 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let identifier = userInfo["action_identifier"] as? String, amount = userInfo["amount"] as? String where identifier == payIdentifier{
                 //# TODO: ideally use local notification to avoid rudely interrupting user
                 showAlert(amount)
+            }else{
+                if let rootViewController = window?.rootViewController as? ViewController, aps = userInfo["aps"] as? [String: AnyObject], message = aps["alert"] as? String, sender = userInfo["sender"] as? String {
+                    rootViewController.messageList?.addMessage(Message(message:message, sender: sender))
+                }
             }
     }
     
@@ -120,6 +127,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func alertHandler(act:UIAlertAction) {
                    
     }
+    
+   
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

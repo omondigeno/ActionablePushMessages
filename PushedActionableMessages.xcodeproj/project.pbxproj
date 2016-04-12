@@ -25,6 +25,10 @@
 		B5726ABB1CBA698200A8B17E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5726ABA1CBA698200A8B17E /* Localizable.strings */; };
 		B5726ABE1CBA6A0F00A8B17E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5726ABD1CBA6A0F00A8B17E /* Utils.swift */; };
 		B5726AC11CBA6B4200A8B17E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5726AC01CBA6B4200A8B17E /* Common.swift */; };
+		B57D61841CBD2132004E56F2 /* MessageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61831CBD2130004E56F2 /* MessageList.swift */; };
+		B57D61861CBD2187004E56F2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61851CBD2187004E56F2 /* Message.swift */; };
+		B57D61881CBD229F004E56F2 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61871CBD229F004E56F2 /* MessageView.swift */; };
+		B57D618A1CBD5566004E56F2 /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61891CBD5566004E56F2 /* MessageLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		B5726ABA1CBA698200A8B17E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B5726ABD1CBA6A0F00A8B17E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		B5726AC01CBA6B4200A8B17E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		B57D61831CBD2130004E56F2 /* MessageList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageList.swift; sourceTree = "<group>"; };
+		B57D61851CBD2187004E56F2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		B57D61871CBD229F004E56F2 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		B57D61891CBD5566004E56F2 /* MessageLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageLabel.swift; sourceTree = "<group>"; };
 		D57212A409195626F7D98F9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +179,7 @@
 			children = (
 				B5726AB71CBA677200A8B17E /* json */,
 				B53634221CBA647E00CF4D5E /* http */,
+				B57D61851CBD2187004E56F2 /* Message.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -208,6 +217,9 @@
 				B52C798A1CBA802D0040CC60 /* DodoDistrib.swift */,
 				B5726AC01CBA6B4200A8B17E /* Common.swift */,
 				B52C798E1CBA828B0040CC60 /* UIExtensions.swift */,
+				B57D61831CBD2130004E56F2 /* MessageList.swift */,
+				B57D61871CBD229F004E56F2 /* MessageView.swift */,
+				B57D61891CBD5566004E56F2 /* MessageLabel.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -417,11 +429,15 @@
 				B5726AB41CBA662700A8B17E /* ResponseHandlerDelegate.swift in Sources */,
 				B53633F21CB9A79600CF4D5E /* ViewController.swift in Sources */,
 				B5726AB21CBA653E00A8B17E /* HttpClient.swift in Sources */,
+				B57D61841CBD2132004E56F2 /* MessageList.swift in Sources */,
 				B52C798F1CBA828B0040CC60 /* UIExtensions.swift in Sources */,
+				B57D618A1CBD5566004E56F2 /* MessageLabel.swift in Sources */,
 				B52C798B1CBA802D0040CC60 /* DodoDistrib.swift in Sources */,
 				B5726ABE1CBA6A0F00A8B17E /* Utils.swift in Sources */,
+				B57D61861CBD2187004E56F2 /* Message.swift in Sources */,
 				B5726AB91CBA678800A8B17E /* JSON.swift in Sources */,
 				B5726AB61CBA666F00A8B17E /* ResponseHandler.swift in Sources */,
+				B57D61881CBD229F004E56F2 /* MessageView.swift in Sources */,
 				B53633F01CB9A79600CF4D5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

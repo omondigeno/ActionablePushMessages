@@ -23,7 +23,7 @@ class Utils {
         return defaults.valueForKey(name) as? String
     }
     
-    class func getUUID() -> String? {
+    class func getUUID() -> String {
         if let UUID = getData("UUID") {
         return UUID
         }

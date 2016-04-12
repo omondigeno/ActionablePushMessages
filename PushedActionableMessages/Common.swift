@@ -44,6 +44,24 @@ class Common {
         PKHUD.sharedHUD.hide(animated: false, completion: nil);
         
     }
+    
+    class func dimensionWidth() -> CGFloat{
+        if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            return dimensionWidthPhone
+        } else {
+            return dimensionWidthPad
+        }
+    }
+    class func screenSize() -> CGRect {
+        return UIScreen.mainScreen().bounds
+    }
+    
 }
 
 let payIdentifier = "PAY_IDENTIFIER"
+let payCategoryId = "PAYMENT_CATEGORY"
+let chatCategoryId = "CHAT_CATEGORY"
+
+
+let dimensionWidthPhone: CGFloat = 310
+let dimensionWidthPad: CGFloat = 640
