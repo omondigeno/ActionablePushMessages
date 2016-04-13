@@ -10,20 +10,26 @@ Demonstrate push messages on iOS that require little or no user intervention to 
 
 # Installation
 
-  On the repository page, click  to copy the clone URL for the
+   - On the repository page, click  to copy the clone URL for the
    repository.
    
-   Open Terminal.
+   - Open Terminal.
    
-   Change the current working directory to the location where you want
-   the cloned directory to be made.
+   - Change the current working directory to the location where you want the cloned directory to be made.
    
-   Type git clone, and then paste the URL you copied.
+   - Type git clone, and then paste the URL you copied.
    
-   Run app from Xcode on a connected test device
+   - Run app from Xcode on a connected test device
    
-   Send notification using
-   https://cheza.herokuapp.com/send?category=PAYMENT_CATEGORY
+   - Send notification using
+
+    https://cheza.herokuapp.com/send?category=PAYMENT_CATEGORY&message="Kindly pay KSh 500 due to Pizza Inn"
+
+    OR
+
+    https://cheza.herokuapp.com/send?category=CHAT_CATEGORY&message="Taking you for a test ride!"
+
+
 
 
 

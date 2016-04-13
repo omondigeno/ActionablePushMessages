@@ -10,16 +10,32 @@ import Foundation
 import Alamofire
 import UIKit
 
+/// Handles responses for http requests
 class ResponseHandler: ResponseHandlerDelegate {
     
     var background: Bool
     weak var viewController: UIViewController?
     
+    /**
+     Initializes a new response handler
+     
+     - Parameters:
+     - background: tells us whether the request is done in the background without user knowing or otherwise
+     - viewController: The view controller currently presented
+     
+     */
     init(background: Bool, viewController: UIViewController?){
         self.background = background
         self.viewController = viewController
     }
     
+    /**
+     Called to handle response
+     
+     - Parameters:
+     - response: the object with the response status and data
+     
+     */
     func handleResponse(response: Response<AnyObject, NSError>){
         
         if(response.response?.statusCode == HTTPStatusCode.OK.rawValue){
@@ -40,14 +56,39 @@ class ResponseHandler: ResponseHandlerDelegate {
         }
         
     }
+    /**
+     Called to handle successful response
+     
+     - Parameters:
+     - response: the JSON object with the response data
+     
+     */
     func handleResponse(response: JSON) {
         showMessageHideProgress(getResponseMessage(response))
     }
+    
+    /**
+     Called to handle non http errors in response
+     
+     - Parameters:
+     - response: the JSON object with the response data
+     
+     */
     func handleAPIerror(response: JSON) {
         showMessageHideProgress(getResponseMessage(response))
     }
+    
+    /**
+     Called to get response message
+     
+     - Parameters:
+     - response: the JSON object with the response data
+     
+     - Returns: status message or internal error message if status message was not available
+     
+     */
+    
     func getResponseMessage(response: JSON) -> String? {
-        var msg: String?
         if let responseMesage = response["status_message"].asString {
             return responseMesage;
         }else{
@@ -55,6 +96,13 @@ class ResponseHandler: ResponseHandlerDelegate {
         }
     }
     
+    /**
+     Shows response message and hides progress if request was not in the background
+     
+     - Parameters:
+     - response: the response message
+     
+     */
     func showMessageHideProgress(message: String?){
         if !background && viewController != nil{
             Common.hideProgress(viewController!)
@@ -64,6 +112,14 @@ class ResponseHandler: ResponseHandlerDelegate {
         }
         print(message)
     }
+    
+    /**
+     Handles HTTP status error codes
+     
+     - Parameters:
+     - response: the NSHTTPURLResponse object
+     
+     */
     func handleHTTPerror(response: NSHTTPURLResponse?){
         var msg: String = ""
         switch response?.statusCode {

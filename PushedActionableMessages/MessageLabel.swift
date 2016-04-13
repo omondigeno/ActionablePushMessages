@@ -6,14 +6,14 @@
 //  Copyright © 2016 Geno. All rights reserved.
 //
 import UIKit
-import MK
 
+/// Label view used to display chat messages in list
 class MessageLabel: UILabel {
     
     override init (frame : CGRect) {
         super.init(frame : frame)
         
-        self.textColor = MaterialColor.white
+        self.textColor = UIColor.whiteColor()
         self.font = UIFont.systemFontOfSize(20);
         self.layer.cornerRadius = 5
         self.lineBreakMode = .ByWordWrapping
@@ -30,6 +30,7 @@ class MessageLabel: UILabel {
     }
     
     override func drawTextInRect(rect: CGRect) {
+        ///Ensure enough padding between text content and edges
     super.drawTextInRect(
     rect.insetBy(dx: 10, dy: 10).integral)
     }

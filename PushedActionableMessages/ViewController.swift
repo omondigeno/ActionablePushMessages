@@ -17,23 +17,27 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-view.backgroundColor = UIColor.whiteColor()
-        let materialView: MaterialView = MaterialView(frame:  CGRectZero)
-        materialView.shape = .Square
-        materialView.backgroundColor = UIColor.brandColor
         
-        view.addSubview(materialView)
-        materialView.snp_makeConstraints { (make) -> Void in
+        /// Called when view has been loaded
+        /// We initialize and add views here
+view.backgroundColor = UIColor.whiteColor()
+        let dividerView = UIView(frame:  CGRectZero)
+        dividerView.backgroundColor = UIColor.brandColor
+        
+        view.addSubview(dividerView)
+        ///Set autolayout constraints
+        dividerView.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
             make.width.equalTo(view)
             make.height.equalTo(5)
             make.top.equalTo(80)
  }
-        
+        /// add logo
         let imageView = UIImageView(frame: CGRectZero)
         imageView.contentMode = .ScaleAspectFit
         imageView.image = UIImage(named: "logo")
         view.addSubview(imageView)
+        ///Set autolayout constraints
         imageView.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
             make.width.equalTo(138)
@@ -43,6 +47,7 @@ view.backgroundColor = UIColor.whiteColor()
         
          messageList = MessageList(superView: view)
         
+        /// initialize chat textview properties
         chatTextView.layer.cornerRadius = 5
         chatTextView.layer.borderWidth = 2
         chatTextView.layer.borderColor = UIColor.brandColor.CGColor
@@ -50,6 +55,7 @@ view.backgroundColor = UIColor.whiteColor()
         
     
         view.addSubview(chatTextView)
+        ///Set autolayout constraints
   chatTextView.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(5)
             make.height.equalTo(60)
@@ -58,6 +64,7 @@ view.backgroundColor = UIColor.whiteColor()
 
         }
         
+        //// Create send button, set its properties and add it to main view
         let sendButton = RaisedButton(frame: CGRectZero)
         sendButton.addTarget(self, action: "send:", forControlEvents: .TouchUpInside)
         sendButton.pulseScale = true
@@ -67,6 +74,7 @@ view.backgroundColor = UIColor.whiteColor()
         sendButton.backgroundColor = UIColor.brandColor
         sendButton.setImage(UIImage(named: "ic_arrow_forward"), forState: .Normal)
         view.addSubview(sendButton)
+        ///Set autolayout constraints
         sendButton.snp_makeConstraints { (make) -> Void in
             make.width.equalTo(60)
             make.height.equalTo(60)
@@ -77,7 +85,13 @@ view.backgroundColor = UIColor.whiteColor()
       
 
     }
-    
+    /**
+     Tap action handler for send button
+     
+     - Parameters:
+     - sender: button from which action originated
+     
+     */
     func send(sender:UIButton){
         if chatTextView.text.characters.count > 0 {
         messageList?.addMessage(Message(message:chatTextView.text, sender: Utils.getUUID()))
