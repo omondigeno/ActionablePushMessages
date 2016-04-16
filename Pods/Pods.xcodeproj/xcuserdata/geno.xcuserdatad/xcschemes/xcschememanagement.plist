@@ -9,12 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaMQTT.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>MK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,12 +67,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B5246945E44B5FB95982235BAA230A7</key>
+		<key>227E4D4266F41DD5EA756E8041F32D95</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>790244EE651521A72DC989F007440F78</key>
+		<key>472CE071043F049DB4B8A428CC3CEB49</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>499AE5DE7543A730EDE7AD507DD8E22F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>59EBB8A9794C35843F866FEAC5234564</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E8718C533F174ABCC78A522276CB29D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BDD6073DE1D7867326D74EDA9EF0E8D5</key>
+		<key>7F75FBE01E5DC25D6DC3C199EEEF75B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D81A5437DCCF17F9ED36C02E97FAB6D4</key>
+		<key>C8F54543305BD95F34FAB796C9CAAFCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,11 +113,6 @@
 			<true/>
 		</dict>
 		<key>F6F0516F82D07656D12F1C0716898F73</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE37B7970263B260ECD311B8B86E4BE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

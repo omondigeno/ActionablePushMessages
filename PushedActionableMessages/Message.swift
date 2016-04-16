@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import ObjectMapper
 
 /// Message class used to hold chat messages
-class Message {
+class Message: Mappable {
     
     var message: String!
     var sender: String!
@@ -26,5 +27,14 @@ class Message {
     init(message: String, sender: String) {
         self.message = message
         self.sender = sender
+    }
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        message    <- map["message"]
+        sender     <- map["sender"]
     }
 }

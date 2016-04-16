@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C9C5A67210FEEEE7C4E43FB4'
+               BlueprintIdentifier = '4EA31AEF6BACE6502791C80A'
                BlueprintName = 'Pods-PushedActionableMessagesTests'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_PushedActionableMessagesTests.framework'>

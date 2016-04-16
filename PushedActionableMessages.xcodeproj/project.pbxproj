@@ -29,6 +29,9 @@
 		B57D61861CBD2187004E56F2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61851CBD2187004E56F2 /* Message.swift */; };
 		B57D61881CBD229F004E56F2 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61871CBD229F004E56F2 /* MessageView.swift */; };
 		B57D618A1CBD5566004E56F2 /* MessageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D61891CBD5566004E56F2 /* MessageLabel.swift */; };
+		B57D618C1CC051FF004E56F2 /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D618B1CC051FF004E56F2 /* MQTTClient.swift */; };
+		B57D618E1CC0F034004E56F2 /* NLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D618D1CC0F033004E56F2 /* NLP.swift */; };
+		B57D61901CC29DE5004E56F2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57D618F1CC29DE5004E56F2 /* Action.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		B57D61851CBD2187004E56F2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B57D61871CBD229F004E56F2 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		B57D61891CBD5566004E56F2 /* MessageLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageLabel.swift; sourceTree = "<group>"; };
+		B57D618B1CC051FF004E56F2 /* MQTTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
+		B57D618D1CC0F033004E56F2 /* NLP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NLP.swift; sourceTree = "<group>"; };
+		B57D618F1CC29DE5004E56F2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		D57212A409195626F7D98F9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +186,9 @@
 				B5726AB71CBA677200A8B17E /* json */,
 				B53634221CBA647E00CF4D5E /* http */,
 				B57D61851CBD2187004E56F2 /* Message.swift */,
+				B57D618B1CC051FF004E56F2 /* MQTTClient.swift */,
+				B57D618D1CC0F033004E56F2 /* NLP.swift */,
+				B57D618F1CC29DE5004E56F2 /* Action.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -424,6 +433,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B57D618C1CC051FF004E56F2 /* MQTTClient.swift in Sources */,
+				B57D61901CC29DE5004E56F2 /* Action.swift in Sources */,
 				B52C798D1CBA81F50040CC60 /* HTTPStatusCode.swift in Sources */,
 				B5726AC11CBA6B4200A8B17E /* Common.swift in Sources */,
 				B5726AB41CBA662700A8B17E /* ResponseHandlerDelegate.swift in Sources */,
@@ -433,6 +444,7 @@
 				B52C798F1CBA828B0040CC60 /* UIExtensions.swift in Sources */,
 				B57D618A1CBD5566004E56F2 /* MessageLabel.swift in Sources */,
 				B52C798B1CBA802D0040CC60 /* DodoDistrib.swift in Sources */,
+				B57D618E1CC0F034004E56F2 /* NLP.swift in Sources */,
 				B5726ABE1CBA6A0F00A8B17E /* Utils.swift in Sources */,
 				B57D61861CBD2187004E56F2 /* Message.swift in Sources */,
 				B5726AB91CBA678800A8B17E /* JSON.swift in Sources */,

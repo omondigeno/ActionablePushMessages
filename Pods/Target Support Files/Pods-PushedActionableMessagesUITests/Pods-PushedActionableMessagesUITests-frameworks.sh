@@ -85,15 +85,19 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-PushedActionableMessagesUITests/Alamofire.framework"
+  install_framework "Pods-PushedActionableMessagesUITests/CocoaMQTT.framework"
   install_framework "Pods-PushedActionableMessagesUITests/IQKeyboardManagerSwift.framework"
   install_framework "Pods-PushedActionableMessagesUITests/MK.framework"
+  install_framework "Pods-PushedActionableMessagesUITests/ObjectMapper.framework"
   install_framework "Pods-PushedActionableMessagesUITests/PKHUD.framework"
   install_framework "Pods-PushedActionableMessagesUITests/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-PushedActionableMessagesUITests/Alamofire.framework"
+  install_framework "Pods-PushedActionableMessagesUITests/CocoaMQTT.framework"
   install_framework "Pods-PushedActionableMessagesUITests/IQKeyboardManagerSwift.framework"
   install_framework "Pods-PushedActionableMessagesUITests/MK.framework"
+  install_framework "Pods-PushedActionableMessagesUITests/ObjectMapper.framework"
   install_framework "Pods-PushedActionableMessagesUITests/PKHUD.framework"
   install_framework "Pods-PushedActionableMessagesUITests/SnapKit.framework"
 fi

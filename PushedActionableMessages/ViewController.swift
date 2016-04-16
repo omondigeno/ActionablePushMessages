@@ -9,6 +9,7 @@
 import UIKit
 import MK
 import SnapKit
+import ObjectMapper
 
 class ViewController: UIViewController {
     
@@ -83,7 +84,8 @@ view.backgroundColor = UIColor.whiteColor()
             
         }
       
-
+NLP.extractAction("Kindly pay KSh 500 due to Pizza Inn")
+        
     }
     /**
      Tap action handler for send button
@@ -94,9 +96,15 @@ view.backgroundColor = UIColor.whiteColor()
      */
     func send(sender:UIButton){
         if chatTextView.text.characters.count > 0 {
-        messageList?.addMessage(Message(message:chatTextView.text, sender: Utils.getUUID()))
-            //# TODO: actually send to another device and only then can we delete message from textview
+            let message =  Message(message:chatTextView.text, sender: Utils.getUUID())
+        messageList?.addMessage(message)
         chatTextView.text = ""
+            
+            if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
+            messageString = Mapper().toJSONString(message, prettyPrint: true){
+                //# TODO: handle not sent error
+                appDelegate.mqttClient.sendMessage(messageString)
+            }
         }
     }
 

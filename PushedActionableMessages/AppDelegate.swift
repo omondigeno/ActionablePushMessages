@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var  mqttClient = MQTTClient()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -32,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// this lines enables moving of text entry controls to accomodate keyboard
         IQKeyboardManager.sharedManager().enable = true
+        
+        mqttClient.connect()
         
         return true
     }

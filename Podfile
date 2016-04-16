@@ -20,4 +20,6 @@ pod 'MK’
 pod 'SnapKit', '0.15.0'
 pod "PKHUD"
 pod 'IQKeyboardManagerSwift', '4.0.0'
+pod 'CocoaMQTT', ‘1.0.0’ 
+pod 'ObjectMapper', '1.1.5’ 
 
