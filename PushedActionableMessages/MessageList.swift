@@ -38,10 +38,12 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         self.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(superView)
             make.width.equalTo(Common.dimensionWidth())
-            make.height.equalTo(self.contentSize.height+40)
+            make.top.equalTo(90)
             ///place list just above chat textview
             make.bottom.equalTo(-70)
         }
+        
+        rowHeight = UITableViewAutomaticDimension
         
     }
        
@@ -68,7 +70,7 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.font = UIFont.systemFontOfSize(20);
         cell.textLabel?.textColor = MaterialColor.white
 
-        /// Set backgroun color and margin depending on sender
+        /// Set background color and margin depending on sender
         if list[row].sender == Utils.getUUID(){
             cell.messageLabel.snp_makeConstraints { (make) -> Void in
                 make.left.equalTo(30)
@@ -84,6 +86,9 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
             }
             cell.messageLabel.layer.backgroundColor = MaterialColor.grey.darken3.CGColor
         }
+        
+        
+        
         return cell
     }
     
@@ -100,6 +105,31 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         ///makes sure size will be adjusted to wrap content
         return UITableViewAutomaticDimension
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectZero)
+        headerView.userInteractionEnabled = false;
+        
+        return headerView
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tableView.frame.size.height
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectZero)
+        headerView.userInteractionEnabled = false;
+        
+        return headerView
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
     func addMessage(message: Message) {
         list.append(message)
         
@@ -107,9 +137,23 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         reloadData()
         
         /// update layout constraints to accomodate added message
-        self.snp_updateConstraints { (make) -> Void in
+       /* self.snp_updateConstraints { (make) -> Void in
             make.centerX.equalTo(superview!)
              make.height.equalTo(self.contentSize.height+40)
-        }
+        }*/
+
+        let delay = 0.1 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(time, dispatch_get_main_queue(), {
+
+            let indexPath = NSIndexPath(forRow: self.list.count - 1, inSection: 0)
+        self.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+            
+        })
+        
+        
+        
+    
     }
 }
