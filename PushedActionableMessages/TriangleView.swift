@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
+///Used to create caption image for chat messages
 class TriangeView : UIView {
     
+    ///background color
     var bgColor = UIColor.brandColor.CGColor
     
     override init(frame: CGRect) {
@@ -21,7 +23,13 @@ class TriangeView : UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+   
+    /**
+     Draws an upside-down triangle
+     
+     - Parameters:
+     - rect: reactangle defined by this views frame within with it can draw
+          */
     override func drawRect(rect: CGRect) {
 
         if let ctx = UIGraphicsGetCurrentContext() {

@@ -19,15 +19,9 @@ Demonstrate push messages on iOS that require little or no user intervention to 
    
    - Type git clone, and then paste the URL you copied.
    
-   - Run app from Xcode on a connected test device
+   - Run app from Xcode on a connected test device. Do this for 2 devices to test chat functionality
    
-   - Send notification using
-
-    https://cheza.herokuapp.com/send?category=PAYMENT_CATEGORY&message="Kindly pay KSh 500 due to Pizza Inn"
-
-    OR
-
-    https://cheza.herokuapp.com/send?category=CHAT_CATEGORY&message="Taking you for a test ride!"
+   - To see an actionable message send a message starting with the adverbs "Please" or "Kindly" and followed by "pay" e.g., Kindly pay KSh 500 due to Pizza Inn 
 
 
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+///Class that models actions found in messsages
 class Action {
     
     var type: String!
@@ -24,10 +25,14 @@ class Action {
         self.type = type
         self.objects = [AnyObject]()
     }
-    
+    /**
+     Adds the objects of an action
+     
+     - Parameters:
+     - object: an AnyObject instance that the action will use to carry out its intent. Each action subclass will the specific object types that it can operate one
+     
+     */
     func addObject(object: AnyObject){
     objects.append(object)
     }
 }
-
-let payAction = "PAY_ACTION"

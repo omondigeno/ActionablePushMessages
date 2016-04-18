@@ -10,6 +10,10 @@ import Foundation
 
 extension String {
     
+    /**
+     Capitalizes the first letter of words in a string
+     */
+    
     var wordCaps:String {
         let listOfWords:[String] = self.componentsSeparatedByString(" ")
         var returnString: String = ""

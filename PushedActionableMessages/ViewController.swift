@@ -101,6 +101,7 @@ view.backgroundColor = UIColor.whiteColor()
             messageString = Mapper().toJSONString(message, prettyPrint: true){
                 //# TODO: handle not sent error
                 if appDelegate.mqttClient.connected {
+                    ///Only send message, add it to list and delete it from chatTextView if client is connected
                     messageList?.addMessage(message)
                     chatTextView.text = ""
                 appDelegate.mqttClient.sendMessage(messageString)

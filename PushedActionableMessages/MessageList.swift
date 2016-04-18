@@ -61,26 +61,24 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         
         let row = indexPath.row
 
-        ///Here we get a reusable instance of a view we will use to render our messages
         var cell: MessageView?
         
-        
-           // cell = MessageView(style: UITableViewCellStyle.Subtitle,
-               // reuseIdentifier: "cell")
-        
-        
 
-        /// Set background color and margin depending on sender
+        /// Set layout parameters, background color, margin depending on sender
         if list[row].sender == Utils.getUUID(){
+            ///Get a reusable instance of a view we will use to render messages sent by this device's user
             cell = tableView.dequeueReusableCellWithIdentifier("cellRight", forIndexPath: indexPath) as! MessageViewRight
         }else{
             
-            
             if list[row].action == nil {
-            cell = tableView.dequeueReusableCellWithIdentifier("cellLeft", forIndexPath: indexPath) as! MessageViewLeft
+                ///Get a reusable instance of a view we will use to render messages with no actions sent by another user
+                cell = tableView.dequeueReusableCellWithIdentifier("cellLeft", forIndexPath: indexPath) as! MessageViewLeft
             }
             if let action = list[row].action {
+                ///Get a reusable instance of a view we will use to render messages with actions sent by another user
                 cell = tableView.dequeueReusableCellWithIdentifier("cellLeftAction", forIndexPath: indexPath) as! MessageViewLeftAction
+                
+                ///Set action button title
             (cell as! MessageViewLeftAction).setActionButtonTitle(action.type.wordCaps)
             }
 
@@ -100,18 +98,13 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         cell?.textLabel?.font = UIFont.systemFontOfSize(18);
         cell?.textLabel?.textColor = MaterialColor.white
         
+        ///Make textLabel have same width as the visible messageLabel so that we have the correct height calculated
         cell?.textLabel?.snp_updateConstraints { (make) -> Void in
             make.top.equalTo(0)
             make.left.equalTo(0)
             make.width.equalTo(Common.dimensionWidth()-30)
         }
         
-        if let cellAction = cell as? MessageViewLeftAction {
-          //  cellAction.messageLabel.numberOfLines = 5
-           // cellAction.messageLabel.frame.size.height = 159
-
-            print("\(cellAction.messageLabel.frame.size.height), \(cellAction.messageLabel.numberOfLines)")
-        }
         
         return cell!
     }
@@ -123,6 +116,7 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let row = indexPath.row
         
+        //TODO: Support wrapping of content for messages with actions too
         if list[row].action != nil {
         return 120
         }
@@ -132,9 +126,10 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         ///makes sure size will be adjusted to wrap content
-        return 88
+        return UITableViewAutomaticDimension
     }
     
+    ///Hack to allow messages to be aligned to bottom. No iOS API for this
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRectZero)
         headerView.userInteractionEnabled = false;
@@ -144,19 +139,22 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        ///Hack to allow messages to be aligned to bottom. No iOS API for this
         return tableView.frame.size.height
     }
     
+    ///Creating a footer enables correct scrolling to bottom when new messages are added
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectZero)
-        headerView.userInteractionEnabled = false;
+        let footerView = UIView(frame: CGRectZero)
+        footerView.userInteractionEnabled = false;
         
-        return headerView
+        return footerView
         
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 150
+        ///Creating a footer enables correct scrolling to bottom when new messages are added
+        return 100
     }
     
     func addMessage(message: Message) {
@@ -165,15 +163,13 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         ///Refresh list
         reloadData()
         
-        /// update layout constraints to accomodate added message
-       /* self.snp_updateConstraints { (make) -> Void in
-            make.centerX.equalTo(superview!)
-             make.height.equalTo(self.contentSize.height+40)
-        }*/
+        /// scroll to bottom to the latest message. It is a sync to allow table to finish reloading
 
+        ///Delay in nanoseconds
         let delay = 0.1 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
+        ///scroll in UI thread
         dispatch_after(time, dispatch_get_main_queue(), {
 
             let indexPath = NSIndexPath(forRow: self.list.count - 1, inSection: 0)

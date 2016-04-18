@@ -15,7 +15,8 @@ class MessageView: UITableViewCell {
     
     /// initialize message label with rect = 0 because autolayout will take care of setting height to wrap contents
     var messageLabel = MessageLabel(frame: CGRectZero)
-    var triangleView = TriangeView(frame: CGRectMake(0, 0, 30, 20))
+    ///Used to create caption image for chat messages
+    var triangleView = TriangeView(frame: CGRectMake(0, 0 , 30, 20))
 
    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

@@ -11,6 +11,7 @@ import UIKit
 import MK
 import SnapKit
 
+/// Button used to prompt user to action
 class ActionButton: RaisedButton {
     
     override init (frame : CGRect) {
@@ -24,9 +25,18 @@ class ActionButton: RaisedButton {
     required init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding")
     }
+    /**
+     Initializes a new ActionButton
+     
+     - Parameters:
+     - title: button title
+     
+     - Returns: the initialized ActionButton.
+     */
     init(title: String) {
         super.init(frame: CGRect.zero)
         setTitle(title, forState: .Normal)
+        ///add tap handler
         addTarget(self, action: "tapped:", forControlEvents: .TouchUpInside)
         pulseScale = true
         pulseFill = true
@@ -36,5 +46,6 @@ class ActionButton: RaisedButton {
         backgroundColor = UIColor.brandColor
     }
     func tapped(sender:UIButton){
+        ///TODO: Handle actions
     }
 }
