@@ -15,21 +15,26 @@ class MessageView: UITableViewCell {
     
     /// initialize message label with rect = 0 because autolayout will take care of setting height to wrap contents
     var messageLabel = MessageLabel(frame: CGRectZero)
+    var triangleView = TriangeView(frame: CGRectMake(0, 0, 30, 20))
+
    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.addSubview(triangleView)
+        
         self.addSubview(messageLabel)
         
-        ///Remove ability to show selected row for now
-        let bgColorView = UIView(frame: CGRectZero)
-        bgColorView.backgroundColor = UIColor.clearColor()
-        selectedBackgroundView = bgColorView
+        triangleView.translatesAutoresizingMaskIntoConstraints = false
+       messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        ///Remove ability to show selected row for now
+        selectionStyle = UITableViewCellSelectionStyle.None
     }
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
+    
     
 }

@@ -58,7 +58,10 @@ class MQTTClient: CocoaMQTTDelegate {
         print(message.topic)
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate, rootViewController = appDelegate.window?.rootViewController as? ViewController, messageObject = Mapper<Message>().map(message.string)  {
+
+            
             if messageObject.sender != Utils.getUUID() {
+                messageObject.action = NLP.extractAction(messageObject.message)
             rootViewController.messageList?.addMessage(messageObject)
             }
         }
@@ -97,14 +100,12 @@ class MQTTClient: CocoaMQTTDelegate {
     func mqttDidDisconnect(mqtt: CocoaMQTT, withError err: NSError?) {
         print("didDisconnect")
         //retryConnecting()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1*60*5, target:self, selector: Selector("retryConnecting"), userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1*60*2, target:self, selector: Selector("retryConnecting"), userInfo: nil, repeats: false)
         connected = false
     }
     
     func sendMessage(message: String){
-        if connected {
         mqtt.publish("chat/room/sendy/topic/payment", withString: message, qos: .QOS1)
-        }
     }
     
     func getID(topic: String) -> String{

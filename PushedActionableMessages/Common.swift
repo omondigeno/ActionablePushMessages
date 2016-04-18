@@ -63,5 +63,5 @@ let payCategoryId = "PAYMENT_CATEGORY"
 let chatCategoryId = "CHAT_CATEGORY"
 
 
-let dimensionWidthPhone: CGFloat = 310
-let dimensionWidthPad: CGFloat = 640
+let dimensionWidthPhone: CGFloat = 320
+let dimensionWidthPad: CGFloat = 700

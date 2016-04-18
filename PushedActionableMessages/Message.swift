@@ -14,6 +14,7 @@ class Message: Mappable {
     
     var message: String!
     var sender: String!
+    var action: Action?
     
     /**
      Initializes a new message

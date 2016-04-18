@@ -35,7 +35,7 @@ class NLP {
             
             let token = (sentence as NSString).substringWithRange(tokenRange)
 
-            if tag == NSLinguisticTagVerb, let previousTag = previousTagOrEntity,  previousToken = previousWord where previousTag == NSLinguisticTagAdverb {
+            if tag == NSLinguisticTagVerb, let previousTag = previousTagOrEntity,  previousToken = previousWord where previousTag == NSLinguisticTagAdverb || previousTag == NSLinguisticTagInterjection{
             
                 for verb  in verbs {
                     if (verb.caseInsensitiveCompare(token) == .OrderedSame){
@@ -63,7 +63,6 @@ class NLP {
 
         }
         
-        print("\(action?.objects?[0])")
 
         return action
     }

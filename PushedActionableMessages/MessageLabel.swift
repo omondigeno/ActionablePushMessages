@@ -14,7 +14,7 @@ class MessageLabel: UILabel {
         super.init(frame : frame)
         
         self.textColor = UIColor.whiteColor()
-        self.font = UIFont.systemFontOfSize(20);
+        self.font = UIFont.systemFontOfSize(18);
         self.layer.cornerRadius = 5
         self.lineBreakMode = .ByWordWrapping
         self.numberOfLines = 0

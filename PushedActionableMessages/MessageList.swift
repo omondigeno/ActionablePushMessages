@@ -28,7 +28,9 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         self.delegate      =   self
         self.dataSource    =   self
         /// Set the class we will use to display each table row
-        self.registerClass(MessageView.self, forCellReuseIdentifier: "cell")
+        self.registerClass(MessageViewLeft.self, forCellReuseIdentifier: "cellLeft")
+        self.registerClass(MessageViewRight.self, forCellReuseIdentifier: "cellRight")
+        self.registerClass(MessageViewLeftAction.self, forCellReuseIdentifier: "cellLeftAction")
         self.backgroundColor = UIColor.clearColor()
         self.separatorColor = UIColor.clearColor()
 
@@ -57,39 +59,61 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        ///Here we get a reusable instance of a view we will use to render our messages
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MessageView
-        
         let row = indexPath.row
+
+        ///Here we get a reusable instance of a view we will use to render our messages
+        var cell: MessageView?
         
-        cell.messageLabel.text = list[row].message
-       
-        cell.textLabel?.numberOfLines = 0 ///makes sure size will be adjusted to wrap content
-        //# TODO: find a solution that does not require setting text twice
-        cell.textLabel?.text = list[row].message ///this text is not visible but helps us calculate height required to display our message
-        cell.textLabel?.font = UIFont.systemFontOfSize(20);
-        cell.textLabel?.textColor = MaterialColor.white
+        
+           // cell = MessageView(style: UITableViewCellStyle.Subtitle,
+               // reuseIdentifier: "cell")
+        
+        
 
         /// Set background color and margin depending on sender
         if list[row].sender == Utils.getUUID(){
-            cell.messageLabel.snp_makeConstraints { (make) -> Void in
-                make.left.equalTo(30)
-                make.height.equalTo(cell.textLabel!)
-                make.width.equalTo(Common.dimensionWidth()-30)
-            }
-             cell.messageLabel.layer.backgroundColor = MaterialColor.blue.accent3.CGColor
+            cell = tableView.dequeueReusableCellWithIdentifier("cellRight", forIndexPath: indexPath) as! MessageViewRight
         }else{
-            cell.messageLabel.snp_makeConstraints { (make) -> Void in
-                make.left.equalTo(0)
-                make.height.equalTo(cell.textLabel!)
- make.width.equalTo(Common.dimensionWidth()-30)
+            
+            
+            if list[row].action == nil {
+            cell = tableView.dequeueReusableCellWithIdentifier("cellLeft", forIndexPath: indexPath) as! MessageViewLeft
             }
-            cell.messageLabel.layer.backgroundColor = MaterialColor.grey.darken3.CGColor
+            if let action = list[row].action {
+                cell = tableView.dequeueReusableCellWithIdentifier("cellLeftAction", forIndexPath: indexPath) as! MessageViewLeftAction
+            (cell as! MessageViewLeftAction).setActionButtonTitle(action.type.wordCaps)
+            }
+
+
         }
         
         
         
-        return cell
+        cell?.messageLabel.text = list[row].message
+        
+        cell?.textLabel?.numberOfLines = 0 ///makes sure size will be adjusted to wrap content
+        cell?.textLabel?.lineBreakMode = .ByWordWrapping
+        cell?.textLabel?.hidden = true
+        
+        //# TODO: find a solution that does not require setting text twice
+        cell?.textLabel?.text = list[row].message ///this text is not visible but helps us calculate height required to display our message
+        cell?.textLabel?.font = UIFont.systemFontOfSize(18);
+        cell?.textLabel?.textColor = MaterialColor.white
+        
+        cell?.textLabel?.snp_updateConstraints { (make) -> Void in
+            make.top.equalTo(0)
+            make.left.equalTo(0)
+            make.width.equalTo(Common.dimensionWidth()-30)
+        }
+        
+        if let cellAction = cell as? MessageViewLeftAction {
+          //  cellAction.messageLabel.numberOfLines = 5
+           // cellAction.messageLabel.frame.size.height = 159
+
+            print("\(cellAction.messageLabel.frame.size.height), \(cellAction.messageLabel.numberOfLines)")
+        }
+        
+        return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -97,13 +121,18 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
         
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let row = indexPath.row
+        
+        if list[row].action != nil {
+        return 120
+        }
         ///makes sure size will be adjusted to wrap content
      return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         ///makes sure size will be adjusted to wrap content
-        return UITableViewAutomaticDimension
+        return 88
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -127,7 +156,7 @@ class MessageList: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60
+        return 150
     }
     
     func addMessage(message: Message) {

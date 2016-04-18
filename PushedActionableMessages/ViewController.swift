@@ -84,7 +84,6 @@ view.backgroundColor = UIColor.whiteColor()
             
         }
       
-NLP.extractAction("Kindly pay KSh 500 due to Pizza Inn")
         
     }
     /**
@@ -97,13 +96,17 @@ NLP.extractAction("Kindly pay KSh 500 due to Pizza Inn")
     func send(sender:UIButton){
         if chatTextView.text.characters.count > 0 {
             let message =  Message(message:chatTextView.text, sender: Utils.getUUID())
-        messageList?.addMessage(message)
-        chatTextView.text = ""
             
             if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
             messageString = Mapper().toJSONString(message, prettyPrint: true){
                 //# TODO: handle not sent error
+                if appDelegate.mqttClient.connected {
+                    messageList?.addMessage(message)
+                    chatTextView.text = ""
                 appDelegate.mqttClient.sendMessage(messageString)
+                }else{
+                Common.showMessage(Utils.getString("network_error_msg"), viewController: self)
+                }
             }
         }
     }
